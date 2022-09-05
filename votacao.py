@@ -8,9 +8,9 @@ if __name__ == "__main__":
     janela.title("Votação Eletrônica")
     janela.geometry("490x560+540+153")
     janela.iconbitmap(default="imagens/cat.ico")
-    janela.resizable(width=1, height=1)
+    janela.resizable(width=False, height=False)
 
-    # acao
+    # ação
     def cadastro():
         janela.destroy()
         cadastrar.cadastrar()
