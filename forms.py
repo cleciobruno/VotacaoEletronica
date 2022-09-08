@@ -1,75 +1,114 @@
 from tkinter import *
+import candidatos
+import cadastrar
+import votacao
 
-
+# formulário do síndico
 def form_sindico():
-    janela3 = Tk()
-    janela3.title("Cadastrar Síndico")
-    janela3.geometry("490x560+540+153")
-    janela3.iconbitmap(default="imagens/cat.ico")
-    janela3.resizable(width=False, height=False)
+    janela = Tk()
+    janela.title("Cadastrar Síndico")
+    janela.geometry("490x560+540+153")
+    janela.iconbitmap(default="imagens/cat.ico")
+    janela.resizable(width=False, height=False)
+
+    # função voltar
+    def voltar():
+        janela.destroy()
+        cadastrar.cadastrar()
+
+    # função cadastrar síndico
+    def cadastro_sindico():
+        p = candidatos.Sindico(nome.get(), proposta.get(
+            "1.0", "end-1c"), ap.get(), num.get())
+        candidatos.Sindico.cad_sindico(p)
+        janela.destroy()
+        votacao.janela()
 
     # imagens cadastrar
-    cad1 = PhotoImage(file="imagens/forms_sindico.png")
+    cad = PhotoImage(file="imagens/forms_sindico.png")
     but_cadastro = PhotoImage(file="imagens/but_cadastro.png")
+    but_voltar = PhotoImage(file="imagens/voltar.png")
 
     # fundo cadastrar
-    fundo2 = Label(janela3, image=cad1)
-    fundo2.pack()
+    fundo = Label(janela, image=cad)
+    fundo.pack()
 
-    nome = Entry(janela3, bd=0, font=("Calibri", 15), highlightcolor="black",
+    # caixas de texto e botçoes
+    nome = Entry(janela, bd=0, font=("Calibri", 15), highlightcolor="black",
                  highlightbackground="black", highlightthickness=2)
     nome.place(width=392, height=44, x=49, y=201)
 
-    proposta = Text(janela3, bd=0, font=("Calibri", 15), highlightcolor="black",
+    proposta = Text(janela, bd=0, font=("Calibri", 15), highlightcolor="black",
                     highlightbackground="black", highlightthickness=2, wrap=WORD)
     proposta.place(width=392, height=93, x=49, y=287)
 
-    ap = Entry(janela3, bd=0, font=("Calibri", 15), highlightcolor="black",
+    ap = Entry(janela, bd=0, font=("Calibri", 15), highlightcolor="black",
                highlightbackground="black", highlightthickness=2)
     ap.place(width=147, height=44, x=49, y=424)
 
-    num = Entry(janela3, bd=0, font=("Calibri", 15), highlightcolor="black",
+    num = Entry(janela, bd=0, font=("Calibri", 15), highlightcolor="black",
                 highlightbackground="black", highlightthickness=2)
     num.place(width=147, height=44, x=294, y=424)
 
-    but_cad = Button(janela3, bd=0, bg="#00c4cc",
-                     image=but_cadastro)
+    but_cad = Button(janela, bd=0, bg="#00c4cc",
+                     image=but_cadastro, command=cadastro_sindico)
     but_cad.place(width=190, height=56, x=150, y=489)
 
-    janela3.mainloop()
+    volta = Button(janela, bd=0, bg="#00c4cc",
+                   image=but_voltar, command=voltar)
+    volta.place(width=40, height=40, x=7, y=514)
 
+    janela.mainloop()
 
-form_sindico()
-
-
+# formulário secretário
 def form_secretario():
-    janela4 = Tk()
-    janela4.title("Cadastrar Síndico")
-    janela4.geometry("490x560+540+153")
-    janela4.iconbitmap(default="imagens/cat.ico")
-    janela4.resizable(width=False, height=False)
+    janela = Tk()
+    janela.title("Cadastrar Síndico")
+    janela.geometry("490x560+540+153")
+    janela.iconbitmap(default="imagens/cat.ico")
+    janela.resizable(width=False, height=False)
+
+    # função voltar
+
+    def voltar():
+        janela.destroy()
+        cadastrar.cadastrar()
+
+    # função cadastrar secretário
+    def cadastro_secretario():
+        p = candidatos.Secretario(nome.get(), ap.get(), num.get())
+        candidatos.Secretario.cad_secretario(p)
+        janela.destroy()
+        votacao.janela()
 
     # imagens cadastrar
-    cad1 = PhotoImage(file="imagens/forms_secre.png")
+    cad = PhotoImage(file="imagens/forms_secre.png")
     but_cadastro = PhotoImage(file="imagens/but_cadastro.png")
+    but_voltar = PhotoImage(file="imagens/voltar.png")
 
     # fundo cadastrar
-    fundo3 = Label(janela4, image=cad1)
-    fundo3.pack()
+    fundo = Label(janela, image=cad)
+    fundo.pack()
 
-    nome1 = Entry(janela4, bd=0, font=("Calibri", 15), highlightcolor="black",
-                  highlightbackground="black", highlightthickness=2)
-    nome1.place(width=392, height=44, x=49, y=236)
-
-    ap1 = Entry(janela4, bd=0, font=("Calibri", 15), highlightcolor="black",
-                highlightbackground="black", highlightthickness=2)
-    ap1.place(width=147, height=44, x=49, y=390)
-
-    num1 = Entry(janela4, bd=0, font=("Calibri", 15), highlightcolor="black",
+    # caixas de texto e botçoes
+    nome = Entry(janela, bd=0, font=("Calibri", 15), highlightcolor="black",
                  highlightbackground="black", highlightthickness=2)
-    num1.place(width=147, height=44, x=294, y=390)
+    nome.place(width=392, height=44, x=49, y=236)
 
-    but_cad1 = Button(janela4, bd=0, bg="#00c4cc", image=but_cadastro)
-    but_cad1.place(width=190, height=56, x=150, y=472)
+    ap = Entry(janela, bd=0, font=("Calibri", 15), highlightcolor="black",
+               highlightbackground="black", highlightthickness=2)
+    ap.place(width=147, height=44, x=49, y=390)
 
-    janela4.mainloop()
+    num = Entry(janela, bd=0, font=("Calibri", 15), highlightcolor="black",
+                highlightbackground="black", highlightthickness=2)
+    num.place(width=147, height=44, x=294, y=390)
+
+    but_cad = Button(janela, bd=0, bg="#00c4cc",
+                     image=but_cadastro, command=cadastro_secretario)
+    but_cad.place(width=190, height=56, x=150, y=472)
+
+    volta = Button(janela, bd=0, bg="#00c4cc",
+                   image=but_voltar, command=voltar)
+    volta.place(width=40, height=40, x=7, y=514)
+
+    janela.mainloop()
