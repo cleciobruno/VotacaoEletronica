@@ -1,4 +1,4 @@
-from tkinter import ttk
+from tkinter import messagebox, ttk
 import pandas as pd
 from tkinter import *
 import votacao
@@ -56,6 +56,20 @@ def mostrar():
     tabela.heading("proposta", text="Proposta", anchor="center")
     tabela.heading("apartamento", text="Apartamento", anchor="center")
     tabela.heading("num_chapa", text="Número da Chapa", anchor="center")
+
+
+    def item_selected(event):
+        for selected_item in tabela.selection():
+            item = tabela.item(selected_item)
+            record = item['values']
+            # show a message
+            x = messagebox.askquestion("Deletar", f"Você deseja deletar '{record[1]}'?")
+            if x == "yes":
+                tabela.delete(selected_item)
+
+
+    tabela.bind('<<TreeviewSelect>>', item_selected)
+
 
     # for para percorrer o dataframe
     for i in range(len(df)):
