@@ -1,12 +1,11 @@
 from tkinter import *
-import cadastrar
 import lista
 import os
 
-
+# função principal
 def janela():
     os.system('cls')
-    
+
     # janela principal
     janela = Tk()
     janela.title("Votação Eletrônica")
@@ -14,39 +13,39 @@ def janela():
     janela.iconbitmap(default="imagens/cat.ico")
     janela.resizable(width=False, height=False)
 
-    # redireciona para cadastro
-    def cadastro():
-        janela.destroy()
-        cadastrar.cadastrar()
-
     # redireciona para lista
     def visualizar():
         janela.destroy()
         lista.mostrar()
 
     # upload das imagens
-    votacao = PhotoImage(file="imagens/votacao.png")
-    botao_cadastrar = PhotoImage(file="imagens/but_cadastrar.png")
-    botao_visualizar = PhotoImage(file="imagens/but_visualizar.png")
-    botao_atualizar = PhotoImage(file="imagens/but_atualizar.png")
-    botao_remover = PhotoImage(file="imagens/but_remover.png")
-
+    votacao = PhotoImage(file="imagens/inicial.png")
+    but_crud = PhotoImage(file="imagens/crud.png")
+    but_votacaoe = PhotoImage(file="imagens/votacao_enable.png")
+    but_votacaod = PhotoImage(file="imagens/votacao_disable.png")
     # fundo
     fundo = Label(janela, image=votacao)
     fundo.pack()
 
+    # puxar a quantidade de síndicos e secretários
+    sindi = lista.df.loc[lista.df['Candidato'] == "Síndico"]
+    secre = lista.df.loc[lista.df['Candidato'] == "Secretário"]
+    
+    # verificar se há a quantidade certa para liberar a votação
+    if len(sindi) >= 2 and len(secre) >= 3:
+        cond = "normal"
+    else:
+        cond = "disabled"
+    
     # botões
-    but_cadastrar = Button(janela, bd=0, bg="#00c4cc",
-                           image=botao_cadastrar, command=cadastro)
-    but_cadastrar.place(width=190, height=56, x=150, y=134)
-    but_visualizar = Button(janela, bd=0, bg="#00c4cc",
-                            image=botao_visualizar, command=visualizar)
-    but_visualizar.place(width=190, height=56, x=150, y=227)
-    but_atualizar = Button(janela, bd=0, bg="#00c4cc", image=botao_atualizar)
-    but_atualizar.place(width=190, height=56, x=150, y=320)
-    but_remover = Button(janela, bd=0, bg="#00c4cc", image=botao_remover)
-    but_remover.place(width=190, height=56, x=150, y=413)
+    votac = Button(janela, bd=0, bg="#00c4cc",
+                           image=but_votacaoe, state=cond)
+    votac.place(width=217, height=63, x=136, y=402)
+    crud = Button(janela, bd=0, bg="#00c4cc",
+                           image=but_crud, command=visualizar)
+    crud.place(width=217, height=63, x=136, y=280)
 
+    # loop da janela
     janela.mainloop()
 
 
