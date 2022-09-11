@@ -1,8 +1,8 @@
 from tkinter import *
 import forms
-import votacao
+import lista
 
-
+# função principal
 def cadastrar():
 
     # janela
@@ -15,7 +15,7 @@ def cadastrar():
     # função voltar
     def voltar():
         janela.destroy()
-        votacao.janela()
+        lista.mostrar()
 
     # redireciona para formulário do síndico
     def sindico():
@@ -41,13 +41,12 @@ def cadastrar():
     but_sindico = Button(janela, bd=0, bg="#00c4cc",
                          image=cad_sindico, command=sindico)
     but_sindico.place(width=190, height=56, x=150, y=228)
-
     but_secretario = Button(janela, bd=0, bg="#00c4cc",
                             image=cad_secretario, command=secretario)
     but_secretario.place(width=190, height=56, x=150, y=330)
-
     volta = Button(janela, bd=0, bg="#00c4cc",
                    image=but_voltar, command=voltar)
     volta.place(width=40, height=40, x=7, y=514)
-
+    
+    # loop da janela
     janela.mainloop()
