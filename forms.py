@@ -1,9 +1,12 @@
 from tkinter import *
+from tkinter import messagebox
 import candidatos
 import cadastro_cand
 import lista
 
 # formulário do síndico
+
+
 def form_sindico():
     janela = Tk()
     janela.title("Cadastrar Síndico")
@@ -18,11 +21,14 @@ def form_sindico():
 
     # função cadastrar síndico
     def cadastro_sindico():
-        p = candidatos.Sindico(nome.get(), proposta.get(
-            "1.0", "end-1c"), ap.get(), num.get())
-        candidatos.Sindico.cad_sindico(p)
-        janela.destroy()
-        lista.mostrar()
+        if nome.get() == '' or proposta.get("1.0", "end-1c") == '' or ap.get() == '' or num.get() == '':
+            messagebox.showwarning("Vazio", "Preencha tudo para concluir o cadastro")
+        else:
+            p = candidatos.Sindico(nome.get(), proposta.get(
+                "1.0", "end-1c"), ap.get(), num.get())
+            candidatos.Sindico.cad_sindico(p)
+            janela.destroy()
+            lista.mostrar()
 
     # imagens cadastrar
     cad = PhotoImage(file="imagens/forms_sindico.png")
@@ -52,11 +58,13 @@ def form_sindico():
     volta = Button(janela, bd=0, bg="#00c4cc",
                    image=but_voltar, command=voltar)
     volta.place(width=40, height=40, x=7, y=514)
-    
+
     # loop da janela
     janela.mainloop()
 
 # formulário secretário
+
+
 def form_secretario():
     janela = Tk()
     janela.title("Cadastrar Síndico")
@@ -71,10 +79,13 @@ def form_secretario():
 
     # função cadastrar secretário
     def cadastro_secretario():
-        p = candidatos.Secretario(nome.get(), ap.get(), num.get())
-        candidatos.Secretario.cad_secretario(p)
-        janela.destroy()
-        lista.mostrar()
+        if nome.get() == '' or ap.get() == '' or num.get() == '':
+            messagebox.showwarning("Vazio", "Preencha tudo para concluir o cadastro")
+        else:
+            p = candidatos.Secretario(nome.get(), ap.get(), num.get())
+            candidatos.Secretario.cad_secretario(p)
+            janela.destroy()
+            lista.mostrar()
 
     # imagens cadastrar
     cad = PhotoImage(file="imagens/forms_secre.png")

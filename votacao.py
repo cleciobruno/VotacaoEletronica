@@ -43,7 +43,7 @@ def janela():
         cond = "disabled"
     
     # botões
-    votac = Button(janela, bd=0, bg="#00c4cc", state=cond,
+    votac = Button(janela, bd=0, bg="#00c4cc", state='normal',
                            image=but_votacaoe, command=iniciar)
     votac.place(width=217, height=63, x=136, y=402)
     crud = Button(janela, bd=0, bg="#00c4cc",
