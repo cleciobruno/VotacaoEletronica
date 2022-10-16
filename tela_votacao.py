@@ -51,6 +51,38 @@ def votar():
                 global clecio
                 clecio = formar(br,rb)
     
+
+    def ver():
+        frame1 = Frame(janela, borderwidth= 2, relief="solid")
+        frame1.place(width=490, height=189, x=105 , y=411)
+            
+        
+        tabela = ttk.Treeview(frame1)
+        tabela["columns"] = ("candidato", "nome", "proposta",
+                            "apartamento", "num_chapa")
+        tabela.column("#0", width=0,  stretch=NO)
+        tabela.column("candidato", anchor="center", width=20)
+        tabela.column("nome", anchor="center", width=15)
+        tabela.column("proposta", anchor="center", width=100)
+        tabela.column("apartamento", anchor="center", width=40)
+        tabela.column("num_chapa", anchor="center", width=65)
+        tabela.heading("#0", text="", anchor="center")
+        tabela.heading("candidato", text="Candidato", anchor="center")
+        tabela.heading("nome", text="Nome", anchor="center")
+        tabela.heading("proposta", text="Proposta", anchor="center")
+        tabela.heading("apartamento", text="Apartamento", anchor="center")
+        tabela.heading("num_chapa", text="Número da Chapa", anchor="center")
+
+        consul = lista.df.loc[lista.df['Candidato'] == 'Secretário'].reset_index(drop=True)
+        for i in range(len(consul)):
+            cand = consul.loc[i]
+            tabela.insert(parent='', index='end', iid=i, text='', values=(
+            cand.Candidato, cand.Nome, cand.Proposta, cand.Apartamento, cand["Número da Chapa"]))
+        
+        tabela.place(width=490, height=189)
+        return frame1
+
+
     def formar(br,rb):
         
         frame1 = Frame(janela, borderwidth= 2, relief="solid")
@@ -130,13 +162,9 @@ def votar():
                             image=branco)
     branca.place(width=122, height=53, x=13, y=329)
 
-    sindico = Button(janela, bd=0, bg="#00c4cc",
-                            image=sindicos)
-    sindico.place(width=106, height=47, x=220, y=549)
-
     secretario = Button(janela, bd=0, bg="#00c4cc",
-                            image=secretarios)
-    secretario.place(width=140, height=47, x=350, y=549)
+                        image=secretarios, command=ver)
+    secretario.place(width=140, height=47, x=280, y=547)
 
     n0 = Button(janela, bd=0, bg="#00c4cc",
                             image=b0, command=lambda: cont("0"))
