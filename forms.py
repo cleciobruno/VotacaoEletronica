@@ -56,7 +56,7 @@ def form_sindico():
 
     # função para limitar o número da chapa
     def limitar_tamanho(p):
-        if len(p) > 3:
+        if len(p) > 2:
             return False
         return True
 
@@ -123,7 +123,7 @@ def form_secretario():
 
     # função para limitar o número da chapa
     def limitar_tamanho(p):
-        if len(p) > 4:
+        if len(p) > 3:
             return False
         return True
 

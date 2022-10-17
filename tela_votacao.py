@@ -1,7 +1,9 @@
 from tkinter import *
 from tkinter import ttk
+from tkinter import messagebox
 import lista
 
+# função principal
 def votar():
     janela = Tk()
     janela.title("Votação Eletrônica")
@@ -15,6 +17,7 @@ def votar():
     branco = PhotoImage(file="imagens2/branco.png")
     sindicos = PhotoImage(file="imagens2/sindicos.png")
     secretarios = PhotoImage(file="imagens2/secretarios.png")
+    lupa = PhotoImage(file="imagens2/lupa.png")
     b0 = PhotoImage(file="imagens2/0.png")
     b1 = PhotoImage(file="imagens2/1.png")
     b2 = PhotoImage(file="imagens2/2.png")
@@ -51,10 +54,26 @@ def votar():
                 global clecio
                 clecio = formar(br,rb)
     
+    def pesquisar():
+        nome = busca.get()
+        br = lista.df.loc[lista.df["Nome"] == nome]
+        rb = lista.df.index[lista.df["Nome"] == nome].tolist()
+        if len(br) != 0:
+            global clecio3
+            clecio3 = formar(br,rb)
+        else:
+            messagebox.showwarning("Erro", "Este candidato não existe")
 
+
+
+    def ler():
+        global clecio2
+        clecio2 = ver()
+
+    # função para mostrar os secretários cadastrados
     def ver():
         frame1 = Frame(janela, borderwidth= 2, relief="solid")
-        frame1.place(width=490, height=189, x=105 , y=411)
+        frame1.place(width=488, height=189, x=105 , y=411)
             
         
         tabela = ttk.Treeview(frame1)
@@ -82,11 +101,11 @@ def votar():
         tabela.place(width=490, height=189)
         return frame1
 
-
+    # função para mostrar o secretário digitado na urna
     def formar(br,rb):
         
         frame1 = Frame(janela, borderwidth= 2, relief="solid")
-        frame1.place(width=490, height=189, x=105 , y=411)
+        frame1.place(width=488, height=189, x=105 , y=411)
             
         
         tabela = ttk.Treeview(frame1)
@@ -122,8 +141,19 @@ def votar():
             entra2.place(width=48, height=48, x=204 , y=201)
             entra3 = Button(janela, bd=0, font=("Calibri", 15), borderwidth= 1, relief="solid", justify="center",text="")
             entra3.place(width=48, height=48, x=252 , y=201)
-
-            clecio.destroy()
+            try:
+                clecio.destroy()
+            except:
+                pass
+            try:
+                clecio2.destroy()
+            except:
+                pass
+            try:
+                clecio3.destroy()
+            except:
+                pass
+            
             
         
         if len(x) == 1:
@@ -163,7 +193,7 @@ def votar():
     branca.place(width=122, height=53, x=13, y=329)
 
     secretario = Button(janela, bd=0, bg="#00c4cc",
-                        image=secretarios, command=ver)
+                        image=secretarios, command=ler)
     secretario.place(width=140, height=47, x=280, y=547)
 
     n0 = Button(janela, bd=0, bg="#00c4cc",
@@ -196,5 +226,12 @@ def votar():
     n9 = Button(janela, bd=0, bg="#00c4cc",
                             image=b9, command=lambda: cont("9"))
     n9.place(width=51, height=51, x=608, y=236)
+
+    busca = Entry(janela, bd=0, font=("Calibri", 15), highlightcolor="black",
+                 highlightbackground="black", highlightthickness=2)
+    busca.place(width=243, height=43, x=228, y=484)
+
+    lupas = Button(janela, bd=0, bg="#ffffff", image=lupa, command=pesquisar)
+    lupas.place(width=30, height=30, x=427, y=491)
 
     janela.mainloop()
