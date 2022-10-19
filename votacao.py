@@ -19,6 +19,7 @@ def janela():
         janela.destroy()
         lista.mostrar()
 
+    # redireciona para a votação
     def iniciar():
         janela.destroy()
         tela_votacao.votar()

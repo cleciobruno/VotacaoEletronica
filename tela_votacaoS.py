@@ -15,7 +15,7 @@ def votar():
     confirma = PhotoImage(file="imagens2/confirma.png")
     corrige = PhotoImage(file="imagens2/corrige.png")
     branco = PhotoImage(file="imagens2/branco.png")
-    secretarios = PhotoImage(file="imagens2/secretarios.png")
+    sindicos = PhotoImage(file="imagens2/sindicos.png")
     lupa = PhotoImage(file="imagens2/lupa.png")
     b0 = PhotoImage(file="imagens2/0.png")
     b1 = PhotoImage(file="imagens2/1.png")
@@ -172,22 +172,15 @@ def votar():
         
         if len(x) == 1:
             entra1 = Button(janela, bd=0, font=("Calibri", 15), borderwidth= 1, relief="solid", justify="center", text=x[0])
-            entra1.place(width=48, height=48, x=156 , y=201)
+            entra1.place(width=48, height=48, x=180 , y=201)
 
         elif len(x) == 2:
             entra1 = Button(janela, bd=0, font=("Calibri", 15), borderwidth= 1, relief="solid", justify="center", text=x[0])
-            entra1.place(width=48, height=48, x=156 , y=201)
+            entra1.place(width=48, height=48, x=180 , y=201)
             entra2 = Button(janela, bd=0, font=("Calibri", 15), borderwidth= 1, relief="solid", justify="center",text=x[1])
-            entra2.place(width=48, height=48, x=204 , y=201)
-
-        elif len(x) == 3:
-            entra1 = Button(janela, bd=0, font=("Calibri", 15), borderwidth= 1, relief="solid", justify="center", text=x[0])
-            entra1.place(width=48, height=48, x=156 , y=201)
-            entra2 = Button(janela, bd=0, font=("Calibri", 15), borderwidth= 1, relief="solid", justify="center",text=x[1])
-            entra2.place(width=48, height=48, x=204 , y=201)
-            entra3 = Button(janela, bd=0, font=("Calibri", 15), borderwidth= 1, relief="solid", justify="center",text=x[2])
-            entra3.place(width=48, height=48, x=252 , y=201)
+            entra2.place(width=48, height=48, x=228 , y=201)
             candi()
+            
         
 
 
@@ -206,9 +199,9 @@ def votar():
                             image=branco, command=votoBranco)
     branca.place(width=122, height=53, x=13, y=329)
 
-    secretario = Button(janela, bd=0, bg="#00c4cc",
-                        image=secretarios, command=ler)
-    secretario.place(width=140, height=47, x=280, y=547)
+    sind = Button(janela, bd=0, bg="#00c4cc",
+                        image=sindicos, command=ler)
+    sind.place(width=140, height=47, x=280, y=547)
 
     n0 = Button(janela, bd=0, bg="#00c4cc",
                             image=b0, command=lambda: cont("0"))
