@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
-import lista, votos
+import lista, votos, tela_votacao
 
 # função principal
 def votar():
@@ -11,7 +11,7 @@ def votar():
     janela.iconbitmap(default="imagens/cat.ico")
     janela.resizable(width=False, height=False)
 
-    tela = PhotoImage(file="imagens2/telaV.png")
+    tela = PhotoImage(file="imagens2/telaVS.png")
     confirma = PhotoImage(file="imagens2/confirma.png")
     corrige = PhotoImage(file="imagens2/corrige.png")
     branco = PhotoImage(file="imagens2/branco.png")
@@ -36,7 +36,7 @@ def votar():
 
     x = []
     def cont(f):
-        if len(x) != 3:
+        if len(x) != 2:
             x.append(f)
         bruno()
 
@@ -45,23 +45,28 @@ def votar():
         bruno()
 
     def votoBranco():
-        votos.votar('Branco')
-        print(votos.df)
+        votos.votar1('Branco')
+        voltar()
+
+    def voltar():
+        janela.destroy()
+        tela_votacao.votar()
+        
 
     def confirmacao():
-        g = x[0]+x[1]+x[2]
+        g = x[0]+x[1]
         secre = lista.df.loc[lista.df['Número da Chapa'] == g]
         if len(secre) > 0:
             num = lista.df['Nome'].loc[lista.df['Número da Chapa'] == g]
-            votos.votar(num.iloc[0])
-            print(votos.df)
+            votos.votar1(num.iloc[0])
+            voltar()
         else:
             messagebox.showwarning("Erro", "Este candidato não existe")
 
 
     def candi():
-        if len(x) == 3:
-            g = x[0]+x[1]+x[2]
+        if len(x) == 2:
+            g = x[0]+x[1]
             br = lista.df.loc[lista.df["Número da Chapa"] == g]
             rb = lista.df.index[lista.df["Número da Chapa"] == g].tolist()
             if len(br) != 0:
@@ -106,7 +111,7 @@ def votar():
         tabela.heading("apartamento", text="Apartamento", anchor="center")
         tabela.heading("num_chapa", text="Número da Chapa", anchor="center")
 
-        consul = lista.df.loc[lista.df['Candidato'] == 'Secretário'].reset_index(drop=True)
+        consul = lista.df.loc[lista.df['Candidato'] == 'Síndico'].reset_index(drop=True)
         for i in range(len(consul)):
             cand = consul.loc[i]
             tabela.insert(parent='', index='end', iid=i, text='', values=(
@@ -150,11 +155,9 @@ def votar():
     def bruno():
         if len(x) == 0:
             entra1 = Button(janela, bd=0, font=("Calibri", 15), borderwidth= 1, relief="solid", justify="center", text="")
-            entra1.place(width=48, height=48, x=156 , y=201)
+            entra1.place(width=48, height=48, x=180 , y=201)
             entra2 = Button(janela, bd=0, font=("Calibri", 15), borderwidth= 1, relief="solid", justify="center",text="")
-            entra2.place(width=48, height=48, x=204 , y=201)
-            entra3 = Button(janela, bd=0, font=("Calibri", 15), borderwidth= 1, relief="solid", justify="center",text="")
-            entra3.place(width=48, height=48, x=252 , y=201)
+            entra2.place(width=48, height=48, x=228 , y=201)
             try:
                 clecio.destroy()
             except:

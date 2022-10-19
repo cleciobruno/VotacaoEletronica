@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
-import lista, votos
+import lista, votos, tela_votacaoS, tela_finalizacao
 
 # função principal
 def votar():
@@ -16,6 +16,7 @@ def votar():
     corrige = PhotoImage(file="imagens2/corrige.png")
     branco = PhotoImage(file="imagens2/branco.png")
     secretarios = PhotoImage(file="imagens2/secretarios.png")
+    but_voltar = PhotoImage(file="imagens2/voltar.png")
     lupa = PhotoImage(file="imagens2/lupa.png")
     b0 = PhotoImage(file="imagens2/0.png")
     b1 = PhotoImage(file="imagens2/1.png")
@@ -44,9 +45,17 @@ def votar():
         x.clear()
         bruno()
 
+    def passar():
+        janela.destroy()
+        tela_votacaoS.votar()
+    
+    def retornar():
+        janela.destroy()
+        tela_finalizacao.janela()
+
     def votoBranco():
         votos.votar('Branco')
-        print(votos.df)
+        passar()
 
     def confirmacao():
         g = x[0]+x[1]+x[2]
@@ -54,7 +63,7 @@ def votar():
         if len(secre) > 0:
             num = lista.df['Nome'].loc[lista.df['Número da Chapa'] == g]
             votos.votar(num.iloc[0])
-            print(votos.df)
+            passar()
         else:
             messagebox.showwarning("Erro", "Este candidato não existe")
 
@@ -247,5 +256,9 @@ def votar():
 
     lupas = Button(janela, bd=0, bg="#ffffff", image=lupa, command=pesquisar)
     lupas.place(width=30, height=30, x=427, y=491)
+
+    volta = Button(janela, bd=0, bg="#00c4cc",
+                   image=but_voltar, command=retornar)
+    volta.place(width=40, height=40, x=7, y=555)
 
     janela.mainloop()
