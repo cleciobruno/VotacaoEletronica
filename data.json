@@ -1,0 +1,21 @@
+[
+  {
+    "Candidato": "Síndico",
+    "Nome": "Bruno",
+    "Proposta": "Reduzir gastos",
+    "Apartamento": 66,
+    "Número da Chapa": 33
+  },
+  {
+    "Candidato": "Secretário",
+    "Nome": "Thiago",
+    "Apartamento": 14,
+    "Número da Chapa": 555
+  },
+  {
+    "Candidato": "Secretário",
+    "Nome": "Robinson",
+    "Apartamento": 17,
+    "Número da Chapa": 222
+  }
+]

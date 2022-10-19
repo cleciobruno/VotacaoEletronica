@@ -1,17 +1,16 @@
 from tkinter import messagebox, ttk
 import pandas as pd
 from tkinter import *
-import votacao
-import cadastro_cand
-import atualizar_cand 
-
+import cadastro_cand, atualizar_cand, votacao
+import json
 # dataframe (lista dos candidatos)
-df = pd.DataFrame(columns=['Candidato', 'Nome',
-                  'Proposta', 'Apartamento', 'Número da Chapa'])
+# df = pd.DataFrame(columns=['Candidato', 'Nome',
+#                   'Proposta', 'Apartamento', 'Número da Chapa'])
+df = pd.read_json('data.json')
+df['Número da Chapa'], df['Apartamento'] = df['Número da Chapa'].astype('string'), df['Apartamento'].astype('string')
 
 # função principal
 def mostrar():
-
     # janela
     janela = Tk()
     janela.title("Visualizar Candidatos")

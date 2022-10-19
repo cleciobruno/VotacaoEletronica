@@ -100,18 +100,16 @@ def votar():
             
         
         tabela = ttk.Treeview(frame1)
-        tabela["columns"] = ("candidato", "nome", "proposta",
+        tabela["columns"] = ("candidato", "nome",
                             "apartamento", "num_chapa")
         tabela.column("#0", width=0,  stretch=NO)
         tabela.column("candidato", anchor="center", width=20)
         tabela.column("nome", anchor="center", width=15)
-        tabela.column("proposta", anchor="center", width=100)
         tabela.column("apartamento", anchor="center", width=40)
         tabela.column("num_chapa", anchor="center", width=65)
         tabela.heading("#0", text="", anchor="center")
         tabela.heading("candidato", text="Candidato", anchor="center")
         tabela.heading("nome", text="Nome", anchor="center")
-        tabela.heading("proposta", text="Proposta", anchor="center")
         tabela.heading("apartamento", text="Apartamento", anchor="center")
         tabela.heading("num_chapa", text="Número da Chapa", anchor="center")
 
@@ -119,7 +117,7 @@ def votar():
         for i in range(len(consul)):
             cand = consul.loc[i]
             tabela.insert(parent='', index='end', iid=i, text='', values=(
-            cand.Candidato, cand.Nome, cand.Proposta, cand.Apartamento, cand["Número da Chapa"]))
+            cand.Candidato, cand.Nome, cand.Apartamento, cand["Número da Chapa"]))
         
         tabela.place(width=490, height=189)
         return frame1
