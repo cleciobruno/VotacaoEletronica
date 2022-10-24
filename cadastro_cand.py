@@ -3,6 +3,8 @@ import forms
 import lista
 
 # função principal
+
+
 def cadastrar():
 
     # janela
@@ -47,6 +49,6 @@ def cadastrar():
     volta = Button(janela, bd=0, bg="#00c4cc",
                    image=but_voltar, command=voltar)
     volta.place(width=40, height=40, x=7, y=514)
-    
+
     # loop da janela
     janela.mainloop()

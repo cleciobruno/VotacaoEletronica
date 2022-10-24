@@ -1,5 +1,7 @@
 from tkinter import *
-import tela_votacao, contabilizar
+import tela_votacao
+import contabilizar
+
 
 def janela():
 
@@ -26,13 +28,13 @@ def janela():
     # fundo
     fundo = Label(janela, image=telaf)
     fundo.pack()
-    
+
     # botões
     votar = Button(janela, bd=0, bg="#00c4cc", state='normal',
-                           image=vota, command=voltar)
+                   image=vota, command=voltar)
     votar.place(width=244, height=56, x=123, y=256)
     fina = Button(janela, bd=0, bg="#00c4cc",
-                           image=finalizar, command=contabilizacao)
+                  image=finalizar, command=contabilizacao)
     fina.place(width=244, height=56, x=123, y=415)
 
     # loop da janela

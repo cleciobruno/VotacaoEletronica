@@ -1,6 +1,8 @@
 from tkinter import *
-from tkinter import messagebox, ttk
+from tkinter import ttk
 import votos
+import lista
+
 
 def janela():
 
@@ -20,7 +22,8 @@ def janela():
         s.theme_use('default')
 
         # Configure the style of Heading in Treeview widget
-        s.configure('Treeview.Heading', background="#D3D3D3", font=('Calibri', 11,'bold'))
+        s.configure('Treeview.Heading', background="#D3D3D3",
+                    font=('Calibri', 11, 'bold'))
 
         tabela = ttk.Treeview(janela)
         tabela["columns"] = ("Nome", "Votos")
@@ -31,25 +34,32 @@ def janela():
         tabela.heading("Nome", text="Nome", anchor="center")
         tabela.heading("Votos", text="Votos", anchor="center")
 
-        data = votos.df1.sort_values(by=['Votos'], ascending=False).reset_index(drop=True)
+        data = votos.df1.sort_values(
+            by=['Votos'], ascending=False).reset_index(drop=True)
         maior = data['Votos'].iloc[0]
         quant = data.loc[data['Votos'] == maior]
+        tabela.tag_configure('a1', background='#FA8700', foreground='white')
+        tabela.tag_configure('a2', background='green', foreground='white')
+
         for i in range(len(data)):
-            tag = ''
-            if i <= len(quant) - 1:
-                if i > 0:
-                    tabela.tag_configure('br', background='#FA8700', foreground='white')
-                    tag = 'br'
+
+            if len(quant) == 1:
+                if i == 0:
+                    tag = 'a2'
                 else:
-                    tabela.tag_configure('br', background='green', foreground='white')
-                    tag = 'br'
+                    tag = ''
             else:
-                tag = ''
+                if i < len(quant):
+                    tag = 'a1'
+                else:
+                    tag = ''
+
             cand = data.loc[i]
-            tabela.insert(parent='', index='end', iid=i, text='', values=(cand.Candidato, cand.Votos), tags=tag)
-            
+            tabela.insert(parent='', index='end', iid=i, text='',
+                          values=(cand.Candidato, cand.Votos), tags=tag)
+
         tabela.place(width=451, height=181, x=19, y=118)
-    
+
     def tabelas1():
         tabela = ttk.Treeview(janela)
         tabela["columns"] = ("Nome", "Votos")
@@ -62,21 +72,48 @@ def janela():
 
         data = votos.df.sort_values(by=['Votos'], ascending=False)
 
-        maior = data['Votos'].iloc[0]
-        quant = data.loc[data['Votos'] == maior]
+        quant = data.loc[data['Votos'] == data['Votos'].iloc[0]]
+        quant1 = data.loc[data['Votos'] == data['Votos'].iloc[1]]
+        tabela.tag_configure('a3', background='green', foreground='white')
+        tabela.tag_configure('a4', background='#FA8700', foreground='white')
+        func = 0
+
+        if len(quant) == 2:
+            func = 1
+
+        if len(quant) == 1:
+            if len(quant1) == 1:
+                func = 1
+            elif len(quant1) > 1:
+                func = 2
+
+        if len(quant) > 2:
+            func = 3
+
         for i in range(len(data)):
-            tag = ''
-            if i <= len(quant) - 1:
-                if i > 0:
-                    tabela.tag_configure('bru', background='#FA8700', foreground='white')
-                    tag = 'bru'
+            if func == 1:
+                if i < 2:
+                    tag = 'a3'
                 else:
-                    tabela.tag_configure('bru', background='green', foreground='white')
-                    tag = 'bru'
-            else:
-                tag = ''
+                    tag = ''
+
+            if func == 2:
+                if i == 0:
+                    tag = 'a3'
+                elif i < len(quant1) + 1:
+                    tag = 'a4'
+                else:
+                    tag = ''
+
+            if func == 3:
+                if i < len(quant):
+                    tag = 'a4'
+                else:
+                    tag = ''
+
             cand = data.loc[i]
-            tabela.insert(parent='', index='end', iid=i, text='', values=(cand.Candidato, cand.Votos), tags=tag)
+            tabela.insert(parent='', index='end', iid=i, text='',
+                          values=(cand.Candidato, cand.Votos), tags=tag)
 
         tabela.place(width=451, height=181, x=19, y=367)
     # fundo
@@ -84,5 +121,8 @@ def janela():
     fundo.pack()
     tabelas()
     tabelas1()
+
+    lista.df.to_json('data2.json')
+
     # loop da janela
     janela.mainloop()

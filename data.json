@@ -17,5 +17,11 @@
     "Nome": "Robinson",
     "Apartamento": 17,
     "Número da Chapa": 222
+  },
+  {
+    "Candidato": "Secretário",
+    "Nome": "Pedro",
+    "Apartamento": 47,
+    "Número da Chapa": 666
   }
 ]

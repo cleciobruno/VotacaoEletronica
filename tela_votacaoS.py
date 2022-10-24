@@ -1,9 +1,13 @@
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
-import lista, votos, tela_votacao
+import lista
+import votos
+import tela_votacao
 
 # função principal
+
+
 def votar():
     janela = Tk()
     janela.title("Votação Eletrônica")
@@ -28,13 +32,11 @@ def votar():
     b8 = PhotoImage(file="imagens2/8.png")
     b9 = PhotoImage(file="imagens2/9.png")
 
-
-
-
     fundo = Label(janela, image=tela)
     fundo.pack()
 
     x = []
+
     def cont(f):
         if len(x) != 2:
             x.append(f)
@@ -51,7 +53,6 @@ def votar():
     def voltar():
         janela.destroy()
         tela_votacao.votar()
-        
 
     def confirmacao():
         g = x[0]+x[1]
@@ -63,7 +64,6 @@ def votar():
         else:
             messagebox.showwarning("Erro", "Este candidato não existe")
 
-
     def candi():
         if len(x) == 2:
             g = x[0]+x[1]
@@ -71,19 +71,17 @@ def votar():
             rb = lista.df.index[lista.df["Número da Chapa"] == g].tolist()
             if len(br) != 0:
                 global clecio
-                clecio = formar(br,rb)
-    
+                clecio = formar(br, rb)
+
     def pesquisar():
         nome = busca.get()
         br = lista.df.loc[lista.df["Nome"] == nome]
         rb = lista.df.index[lista.df["Nome"] == nome].tolist()
         if len(br) != 0:
             global clecio3
-            clecio3 = formar(br,rb)
+            clecio3 = formar(br, rb)
         else:
             messagebox.showwarning("Erro", "Este candidato não existe")
-
-
 
     def ler():
         global clecio2
@@ -91,13 +89,12 @@ def votar():
 
     # função para mostrar os secretários cadastrados
     def ver():
-        frame1 = Frame(janela, borderwidth= 2, relief="solid")
-        frame1.place(width=488, height=189, x=105 , y=411)
-            
-        
+        frame1 = Frame(janela, borderwidth=2, relief="solid")
+        frame1.place(width=488, height=189, x=105, y=411)
+
         tabela = ttk.Treeview(frame1)
         tabela["columns"] = ("candidato", "nome", "proposta",
-                            "apartamento", "num_chapa")
+                             "apartamento", "num_chapa")
         tabela.column("#0", width=0,  stretch=NO)
         tabela.column("candidato", anchor="center", width=20)
         tabela.column("nome", anchor="center", width=15)
@@ -111,25 +108,25 @@ def votar():
         tabela.heading("apartamento", text="Apartamento", anchor="center")
         tabela.heading("num_chapa", text="Número da Chapa", anchor="center")
 
-        consul = lista.df.loc[lista.df['Candidato'] == 'Síndico'].reset_index(drop=True)
+        consul = lista.df.loc[lista.df['Candidato']
+                              == 'Síndico'].reset_index(drop=True)
         for i in range(len(consul)):
             cand = consul.loc[i]
             tabela.insert(parent='', index='end', iid=i, text='', values=(
-            cand.Candidato, cand.Nome, cand.Proposta, cand.Apartamento, cand["Número da Chapa"]))
-        
+                cand.Candidato, cand.Nome, cand.Proposta, cand.Apartamento, cand["Número da Chapa"]))
+
         tabela.place(width=490, height=189)
         return frame1
 
     # função para mostrar o secretário digitado na urna
-    def formar(br,rb):
-        
-        frame1 = Frame(janela, borderwidth= 2, relief="solid")
-        frame1.place(width=488, height=189, x=105 , y=411)
-            
-        
+    def formar(br, rb):
+
+        frame1 = Frame(janela, borderwidth=2, relief="solid")
+        frame1.place(width=488, height=189, x=105, y=411)
+
         tabela = ttk.Treeview(frame1)
         tabela["columns"] = ("candidato", "nome", "proposta",
-                            "apartamento", "num_chapa")
+                             "apartamento", "num_chapa")
         tabela.column("#0", width=0,  stretch=NO)
         tabela.column("candidato", anchor="center", width=20)
         tabela.column("nome", anchor="center", width=15)
@@ -143,21 +140,22 @@ def votar():
         tabela.heading("apartamento", text="Apartamento", anchor="center")
         tabela.heading("num_chapa", text="Número da Chapa", anchor="center")
 
-
         cand = br.loc[rb[0]]
-        
-        tabela.insert(parent='', index='end', iid=rb[0], text='', values=( cand.Candidato, cand.Nome, cand.Proposta, cand.Apartamento, cand["Número da Chapa"]))
-        
+
+        tabela.insert(parent='', index='end', iid=rb[0], text='', values=(
+            cand.Candidato, cand.Nome, cand.Proposta, cand.Apartamento, cand["Número da Chapa"]))
+
         tabela.place(width=490, height=189)
         return frame1
 
-
     def bruno():
         if len(x) == 0:
-            entra1 = Button(janela, bd=0, font=("Calibri", 15), borderwidth= 1, relief="solid", justify="center", text="")
-            entra1.place(width=48, height=48, x=180 , y=201)
-            entra2 = Button(janela, bd=0, font=("Calibri", 15), borderwidth= 1, relief="solid", justify="center",text="")
-            entra2.place(width=48, height=48, x=228 , y=201)
+            entra1 = Button(janela, bd=0, font=(
+                "Calibri", 15), borderwidth=1, relief="solid", justify="center", text="")
+            entra1.place(width=48, height=48, x=180, y=201)
+            entra2 = Button(janela, bd=0, font=(
+                "Calibri", 15), borderwidth=1, relief="solid", justify="center", text="")
+            entra2.place(width=48, height=48, x=228, y=201)
             try:
                 clecio.destroy()
             except:
@@ -170,75 +168,70 @@ def votar():
                 clecio3.destroy()
             except:
                 pass
-            
-            
-        
+
         if len(x) == 1:
-            entra1 = Button(janela, bd=0, font=("Calibri", 15), borderwidth= 1, relief="solid", justify="center", text=x[0])
-            entra1.place(width=48, height=48, x=180 , y=201)
+            entra1 = Button(janela, bd=0, font=(
+                "Calibri", 15), borderwidth=1, relief="solid", justify="center", text=x[0])
+            entra1.place(width=48, height=48, x=180, y=201)
 
         elif len(x) == 2:
-            entra1 = Button(janela, bd=0, font=("Calibri", 15), borderwidth= 1, relief="solid", justify="center", text=x[0])
-            entra1.place(width=48, height=48, x=180 , y=201)
-            entra2 = Button(janela, bd=0, font=("Calibri", 15), borderwidth= 1, relief="solid", justify="center",text=x[1])
-            entra2.place(width=48, height=48, x=228 , y=201)
+            entra1 = Button(janela, bd=0, font=(
+                "Calibri", 15), borderwidth=1, relief="solid", justify="center", text=x[0])
+            entra1.place(width=48, height=48, x=180, y=201)
+            entra2 = Button(janela, bd=0, font=(
+                "Calibri", 15), borderwidth=1, relief="solid", justify="center", text=x[1])
+            entra2.place(width=48, height=48, x=228, y=201)
             candi()
-            
-        
-
-
-
-
 
     confirmar = Button(janela, bd=0, bg="#00c4cc",
-                            image=confirma, command=confirmacao)
+                       image=confirma, command=confirmacao)
     confirmar.place(width=133, height=77, x=311, y=317)
 
     corrigir = Button(janela, bd=0, bg="#00c4cc",
-                            image=corrige, command=corrigindo)
+                      image=corrige, command=corrigindo)
     corrigir.place(width=128, height=53, x=159, y=329)
 
     branca = Button(janela, bd=0, bg="#00c4cc",
-                            image=branco, command=votoBranco)
+                    image=branco, command=votoBranco)
     branca.place(width=122, height=53, x=13, y=329)
 
     sind = Button(janela, bd=0, bg="#00c4cc",
-                        image=sindicos, command=ler)
+                  image=sindicos, command=ler)
     sind.place(width=140, height=47, x=280, y=547)
 
     n0 = Button(janela, bd=0, bg="#00c4cc",
-                            image=b0, command=lambda: cont("0"))
+                image=b0, command=lambda: cont("0"))
     n0.place(width=51, height=51, x=545, y=300)
     n1 = Button(janela, bd=0, bg="#00c4cc",
-                            image=b1, command=lambda: cont("1"))
+                image=b1, command=lambda: cont("1"))
     n1.place(width=51, height=51, x=482, y=110)
     n2 = Button(janela, bd=0, bg="#00c4cc",
-                            image=b2, command=lambda: cont("2"))
+                image=b2, command=lambda: cont("2"))
     n2.place(width=51, height=51, x=545, y=110)
     n3 = Button(janela, bd=0, bg="#00c4cc",
-                            image=b3, command=lambda: cont("3"))
+                image=b3, command=lambda: cont("3"))
     n3.place(width=51, height=51, x=608, y=110)
     n4 = Button(janela, bd=0, bg="#00c4cc",
-                            image=b4, command=lambda: cont("4"))
+                image=b4, command=lambda: cont("4"))
     n4.place(width=51, height=51, x=482, y=173)
     n5 = Button(janela, bd=0, bg="#00c4cc",
-                            image=b5, command=lambda: cont("5"))
+                image=b5, command=lambda: cont("5"))
     n5.place(width=51, height=51, x=545, y=173)
     n6 = Button(janela, bd=0, bg="#00c4cc",
-                            image=b6, command=lambda: cont("6"))
+                image=b6, command=lambda: cont("6"))
     n6.place(width=51, height=51, x=608, y=173)
     n7 = Button(janela, bd=0, bg="#00c4cc",
-                            image=b7, command=lambda: cont("7"))
+                image=b7, command=lambda: cont("7"))
     n7.place(width=51, height=51, x=482, y=236)
     n8 = Button(janela, bd=0, bg="#00c4cc",
-                            image=b8, command=lambda: cont("8"))
+                image=b8, command=lambda: cont("8"))
     n8.place(width=51, height=51, x=545, y=236)
     n9 = Button(janela, bd=0, bg="#00c4cc",
-                            image=b9, command=lambda: cont("9"))
+                image=b9, command=lambda: cont("9"))
     n9.place(width=51, height=51, x=608, y=236)
 
     busca = Entry(janela, bd=0, font=("Calibri", 15), highlightcolor="black",
-                 highlightbackground="black", highlightthickness=2)
+                  highlightbackground="black", highlightthickness=2)
     busca.place(width=243, height=43, x=228, y=484)
 
     lupas = Button(janela, bd=0, bg="#ffffff", image=lupa, command=pesquisar)

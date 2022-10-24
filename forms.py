@@ -22,7 +22,8 @@ def form_sindico():
     # função cadastrar síndico
     def cadastro_sindico():
         if nome.get() == '' or proposta.get("1.0", "end-1c") == '' or ap.get() == '' or num.get() == '':
-            messagebox.showwarning("Vazio", "Preencha tudo para concluir o cadastro")
+            messagebox.showwarning(
+                "Vazio", "Preencha tudo para concluir o cadastro")
         else:
             consul = lista.df.loc[lista.df['Número da Chapa'] == num.get()]
             if len(consul) > 0:
@@ -93,7 +94,8 @@ def form_secretario():
     # função cadastrar secretário
     def cadastro_secretario():
         if nome.get() == '' or ap.get() == '' or num.get() == '':
-            messagebox.showwarning("Vazio", "Preencha tudo para concluir o cadastro")
+            messagebox.showwarning(
+                "Vazio", "Preencha tudo para concluir o cadastro")
         else:
             consul = lista.df.loc[lista.df['Número da Chapa'] == num.get()]
             if len(consul) > 0:
