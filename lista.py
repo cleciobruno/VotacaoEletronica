@@ -1,16 +1,22 @@
 from tkinter import messagebox, ttk
 import pandas as pd
 from tkinter import *
-import votacao
 import cadastro_cand
-import atualizar_cand 
+import atualizar_cand
+import votacao
 
-# dataframe (lista dos candidatos)
-df = pd.DataFrame(columns=['Candidato', 'Nome',
-                  'Proposta', 'Apartamento', 'Número da Chapa'])
+df = pd.read_json('data.json')
+df['Número da Chapa'], df['Apartamento'] = df['Número da Chapa'].astype(
+    'string'), df['Apartamento'].astype('string')
 
 # função principal
+
+
 def mostrar():
+
+    # ordenando o dataframe por Candidato
+    df.sort_values(by='Candidato', inplace=True, ascending=False)
+    df.reset_index(drop=True, inplace=True)
 
     # janela
     janela = Tk()
@@ -80,7 +86,8 @@ def mostrar():
             x = messagebox.askquestion(
                 "Deletar", f"Você deseja deletar '{pessoa[1][1]}'?")
             if x == "yes":
-                df.drop(df.loc[df['Nome'] == pessoa[1][1]].index, inplace=True)
+                df.drop(int(pessoa[0]), inplace=True)
+                df.reset_index(drop=True, inplace=True)
                 janela.destroy()
                 mostrar()
 
@@ -89,7 +96,7 @@ def mostrar():
         if len(pessoa) != 0:
             janela.destroy()
             atualizar_cand.atu_cand(pessoa)
-    
+
     # capta a linha selecionada da tabela
     tabela.bind('<<TreeviewSelect>>', item_selected)
 
@@ -101,7 +108,7 @@ def mostrar():
 
     # ajustando tabela
     tabela.place(width=456, height=390)
-    
+
     # verifica o tamanho da lista para liberação dos botões
     if len(df) > 0:
         cond = "normal"
