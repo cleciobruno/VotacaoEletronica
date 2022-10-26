@@ -47,7 +47,7 @@ def votar():
         bruno()
 
     def votoBranco():
-        votos.votar1('Branco')
+        votos.votar1('Votos em Branco')
         voltar()
 
     def voltar():

@@ -57,7 +57,7 @@ def votar():
         tela_finalizacao.janela()
 
     def votoBranco():
-        votos.votar('Branco')
+        votos.votar('Votos em Branco')
         passar()
 
     def confirmacao():
